@@ -10,24 +10,51 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: #000814;
     color: white;
     text-align: center;
     overflow-x: hidden;
 }
 
-/* Floating hearts */
-.heart {
+/* Intro Screen */
+#intro {
     position: fixed;
-    bottom: -10px;
-    font-size: 20px;
-    animation: float 6s linear infinite;
-    color: #ff4f81;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #000814, #001d3d);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
+#intro h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+#intro button {
+    padding: 14px 32px;
+    font-size: 18px;
+    background: #ff4f81;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* Star Background */
+.star {
+    position: fixed;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
 }
 
 .container {
@@ -90,34 +117,25 @@ footer {
 
 <body>
 
+<!-- Intro Screen -->
+<div id="intro">
+    <h1>Ali ❤️ Mira</h1>
+    <button onclick="enterWorld()">Enter Our World ✨</button>
+</div>
+
 <!-- Background Music -->
 <audio id="bgMusic" src="music.mp3" loop></audio>
 
-<div class="container">
+<div class="container" id="mainContent" style="display:none;">
+
     <h1>Ali ❤️ Mira</h1>
     <h2>I don’t wanna go, but I don’t wanna stay without you.</h2>
 
     <div class="photo">
-        <!-- Make sure your image name matches exactly -->
         <img src="us.jpeg" alt="Ali and Mira">
     </div>
 
-    <p>
-        Mira, even when we’re apart,
-        you’re still the last thought before I sleep
-        and the first one when I wake up.
-    </p>
-
-    <p>
-        No matter the distance, no matter the time zone,
-        my heart somehow always finds its way back to you.
-    </p>
-
-    <button onclick="startExperience()">Click for Something Special 💌</button>
-
-    <p id="secretMessage" style="display:none; margin-top:20px; font-size:20px;">
-        I’ll always be thinking about you. Always. 💙
-    </p>
+    <p id="typewriter"></p>
 
     <footer>
         Made by Ali — For Mira 🌙
@@ -125,24 +143,40 @@ footer {
 </div>
 
 <script>
-function startExperience() {
-    document.getElementById("secretMessage").style.display = "block";
+
+/* Enter World */
+function enterWorld() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
     document.getElementById("bgMusic").play();
 }
 
-/* Floating hearts */
-setInterval(function(){
-    var heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-    document.body.appendChild(heart);
+/* Create Stars */
+for (let i = 0; i < 120; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.width = star.style.height = Math.random() * 3 + "px";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(star);
+}
 
-    setTimeout(function(){
-        heart.remove();
-    }, 6000);
-}, 500);
+/* Typewriter Effect */
+const message = "Mira, even when we’re apart, you’re still the last thought before I sleep and the first one when I wake up. No matter the distance, my heart always finds its way back to you.";
+let i = 0;
+
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("typewriter").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+    }
+}
+
+window.onload = function() {
+    typeWriter();
+};
+
 </script>
 
 </body>
