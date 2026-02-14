@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali ❤️ Mira</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    color: #ff4f81;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-weight: normal;
+    opacity: 0.8;
+}
+
+.photo {
+    margin: 30px auto;
+    width: 320px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+}
+
+.photo img {
+    width: 100%;
+    display: block;
+}
+
+p {
+    font-size: 18px;
+    max-width: 650px;
+    margin: 20px auto;
+    line-height: 1.7;
+}
+
+button {
+    padding: 12px 28px;
+    font-size: 18px;
+    background: #ff4f81;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: white;
+    color: #ff4f81;
+}
+
+footer {
+    margin-top: 50px;
+    font-size: 16px;
+    opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<div class="container">
+    <h1>Ali ❤️ Mira</h1>
+    <h2>I don’t wanna go, but I don’t wanna stay without you.</h2>
+
+    <div class="photo">
+        <!-- Make sure your image name matches exactly -->
+        <img src="us.jpeg" alt="Ali and Mira">
+    </div>
+
+    <p>
+        Mira, even when we’re apart,
+        you’re still the last thought before I sleep
+        and the first one when I wake up.
+    </p>
+
+    <p>
+        No matter the distance, no matter the time zone,
+        my heart somehow always finds its way back to you.
+    </p>
+
+    <button onclick="startExperience()">Click for Something Special 💌</button>
+
+    <p id="secretMessage" style="display:none; margin-top:20px; font-size:20px;">
+        I’ll always be thinking about you. Always. 💙
+    </p>
+
+    <footer>
+        Made by Ali — For Mira 🌙
+    </footer>
+</div>
+
+<script>
+function startExperience() {
+    document.getElementById("secretMessage").style.display = "block";
+    document.getElementById("bgMusic").play();
+}
+
+/* Floating hearts */
+setInterval(function(){
+    var heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+        heart.remove();
+    }, 6000);
+}, 500);
+</script>
+
+</body>
+</html>
